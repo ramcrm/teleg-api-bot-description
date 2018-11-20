@@ -114,44 +114,43 @@ $replyMarkup = json_encode($arMarkup);
 
 Например мы получаем сообщения через `getUpdates`, тогда вызвав метод, мы получаем JSON вида:
 
-```javascript
-{
-	"{"ok":true,"result":
+```
+"{"ok":true,"result":
     [
         {
-            "update_id":Integer,
+            "update_id":xxxxxxxxxx,
             "callback_query":
             {
-                "id":"Integer",
+                "id":"xxxxxxxxxxx",
                 "from":
                 {
-                    "id":Integer,
-                    "first_name":"String",
-                    "last_name":"String",
-                    "username":"String",
+                    "id":xxxxxxxxx,
+                    "first_name":"xxxxxxx",
+                    "last_name":"xxxxxxx",
+                    "username":"xxxxxxxxx",
                     "language_code":"ru"
                 },
                 "message":
                 {
-                    "message_id":Integer,
+                    "message_id":xxxx,
                     "from":
                     {
-                        "id":Integer,
-                        "first_name":"String",
-                        "username":"String"
+                        "id":xxxxxxxxx,
+                        "first_name":"xxxxxxxx",
+                        "username":"xxxxxxx"
                     },
                     "chat":
                     {
-                        "id":Integer,
-                        "first_name":"String",
-                        "last_name":"String",
-                        "username":"String",
+                        "id":xxxxxxxx,
+                        "first_name":"xxxxxxx",
+                        "last_name":"xxxxxxxx",
+                        "username":"xxxxxxx",
                         "type":"private"
                     },
                     "date":1499854111,
                     "text":"test"
                 },
-                "chat_instance":"Integer",
+                "chat_instance":"xxxxxxxxxxxx",
                 "data":"1"
             }
         }
