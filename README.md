@@ -119,39 +119,39 @@ $replyMarkup = json_encode($arMarkup);
 	"{"ok":true,"result":
     [
         {
-            "update_id":xxxxxxxxxx,
+            "update_id":Integer,
             "callback_query":
             {
-                "id":"xxxxxxxxxxx",
+                "id":"Integer",
                 "from":
                 {
-                    "id":xxxxxxxxx,
-                    "first_name":"xxxxxxx",
-                    "last_name":"xxxxxxx",
-                    "username":"xxxxxxxxx",
+                    "id":Integer,
+                    "first_name":"String",
+                    "last_name":"String",
+                    "username":"String",
                     "language_code":"ru"
                 },
                 "message":
                 {
-                    "message_id":xxxx,
+                    "message_id":Integer,
                     "from":
                     {
-                        "id":xxxxxxxxx,
-                        "first_name":"xxxxxxxx",
-                        "username":"xxxxxxx"
+                        "id":Integer,
+                        "first_name":"String",
+                        "username":"String"
                     },
                     "chat":
                     {
-                        "id":xxxxxxxx,
-                        "first_name":"xxxxxxx",
-                        "last_name":"xxxxxxxx",
-                        "username":"xxxxxxx",
+                        "id":Integer,
+                        "first_name":"String",
+                        "last_name":"String",
+                        "username":"String",
                         "type":"private"
                     },
                     "date":1499854111,
                     "text":"test"
                 },
-                "chat_instance":"xxxxxxxxxxxx",
+                "chat_instance":"Integer",
                 "data":"1"
             }
         }
