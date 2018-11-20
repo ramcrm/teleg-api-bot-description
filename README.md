@@ -89,6 +89,103 @@ For example, when someone messages your bot, calling your bot url from the termi
 
 I've prettified the output, but you get the idea.
 
+### getUpdates CallbackQuery
+
+Объект вида `CallbackQuery` возвращается боту (например при использовании метода `getUpdates`) после того как пользователь нажал `CallbackButton`. При этом в объекте в поле `data` будет то, что Вы указали в параметре `callback_data` в массиве описывающем `InlineKeyboardButton`
+
+Например в `reply_markup` мы передаем такой массив:
+
+
+```javascript
+$arMarkup = [
+    'inline_keyboard' => [
+        [
+            ['text' => 'test_1','callback_data' => '1'],
+            ['text' => 'test_2','callback_data' => '2'],
+        ]
+    ]
+];
+
+//не забываем преобразовать в JSON
+$replyMarkup = json_encode($arMarkup);
+```
+
+Пользователь в клиенте нажимает кнопку с надписью `test_1` и затем ответ с `CallbackQuery` отправляется на веб-хук или мы сами должны получить его через метод `getUpdates`
+
+Например мы получаем сообщения через `getUpdates`, тогда вызвав метод, мы получаем JSON вида:
+
+```javascript
+{
+	"{"ok":true,"result":
+    [
+        {
+            "update_id":xxxxxxxxxx,
+            "callback_query":
+            {
+                "id":"xxxxxxxxxxx",
+                "from":
+                {
+                    "id":xxxxxxxxx,
+                    "first_name":"xxxxxxx",
+                    "last_name":"xxxxxxx",
+                    "username":"xxxxxxxxx",
+                    "language_code":"ru"
+                },
+                "message":
+                {
+                    "message_id":xxxx,
+                    "from":
+                    {
+                        "id":xxxxxxxxx,
+                        "first_name":"xxxxxxxx",
+                        "username":"xxxxxxx"
+                    },
+                    "chat":
+                    {
+                        "id":xxxxxxxx,
+                        "first_name":"xxxxxxx",
+                        "last_name":"xxxxxxxx",
+                        "username":"xxxxxxx",
+                        "type":"private"
+                    },
+                    "date":1499854111,
+                    "text":"test"
+                },
+                "chat_instance":"xxxxxxxxxxxx",
+                "data":"1"
+            }
+        }
+    ]
+}"
+```
+
+Далее можно обработать этот `CallbackQuery` и например отправить пользователю сообщение в зависимости от того что содержится в поле data
+
+Совсем простой пример:
+```javascript
+<?php
+$bot = new TelegramBot();
+$arUpdates = $bot->getUpdates();
+
+if (!empty($arUpdates['result'])) { 
+    foreach ($arUpdates['result'] as $arResult) {
+        if (array_key_exists('callback_query',$arResult)) {
+
+            $userId = $arResult['callback_query']['from']['id']; 
+
+            if ($arResult['callback_query']['data'] == 1) {
+                $bot->sendMessage($userId, 'Its ok!');
+            } else {
+                $bot->sendMessage($userId, 'Its not ok!');
+            }
+        }
+    }
+}
+?>
+```
+`callback_data` никуда не ведет, это просто строка длинной до 64 байт, которая возвращается боту после нажатия на кнопку.
+
+
 ### sendMessage
 
 Now that you maybe have a couple of message queued for your bot, it's time to reply them.
